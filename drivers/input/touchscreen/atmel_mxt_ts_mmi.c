@@ -4349,7 +4349,11 @@ static DEVICE_ATTR(debug_notify, S_IRUGO, mxt_debug_notify_show, NULL);
 static DEVICE_ATTR(debug_enable, S_IWUSR | S_IRUSR, mxt_debug_enable_show,
 				mxt_debug_enable_store);
 static DEVICE_ATTR(tsi, S_IRUGO, mxt_ud_show, NULL);
-static DEVICE_ATTR(tsp, S_IWUSR | S_IWGRP | S_IRUGO,
+// Make this readonly, since userspace is messing with this, whyever...
+static DEVICE_ATTR(tsp, S_IRUSR | S_IRGRP | S_IRUGO,
+				mxt_tsp_show, mxt_tsp_store);
+// Add a new sysfs interface for use by ROM / CMHW to properly give user controll
+static DEVICE_ATTR(dt2w, S_IWUSR | S_IWGRP | S_IRUGO,
 				mxt_tsp_show, mxt_tsp_store);
 
 static struct attribute *mxt_attrs[] = {
@@ -4373,6 +4377,7 @@ static struct attribute *mxt_attrs[] = {
 	&dev_attr_debug_notify.attr,
 	&dev_attr_tsi.attr,
 	&dev_attr_tsp.attr,
+	&dev_attr_dt2w.attr,
 	NULL
 };
 
