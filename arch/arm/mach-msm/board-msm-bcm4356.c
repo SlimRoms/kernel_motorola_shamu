@@ -398,10 +398,6 @@ struct cntry_locales_custom brcm_wlan_translate_nodfs_table[] = {
 	{"TW", "TW", 60},
 };
 
-struct cntry_locales_custom brcm_wlan_translate_ap_table[] = {
-	{"JP", "JP", 991},
-};
-
 static void *brcm_wlan_get_country_code(char *ccode, u32 flags)
 {
 	struct cntry_locales_custom *locales;
@@ -410,14 +406,6 @@ static void *brcm_wlan_get_country_code(char *ccode, u32 flags)
 
 	if (!ccode)
 		return NULL;
-
-	if (flags & WLAN_PLAT_AP_FLAG) {
-		locales = brcm_wlan_translate_ap_table;
-		size = ARRAY_SIZE(brcm_wlan_translate_ap_table);
-		for (i = 0; i < size; i++)
-			if (strcmp(ccode, locales[i].iso_abbrev) == 0)
-				return &locales[i];
-	}
 
 	if (flags & WLAN_PLAT_NODFS_FLAG) {
 		locales = brcm_wlan_translate_nodfs_table;
