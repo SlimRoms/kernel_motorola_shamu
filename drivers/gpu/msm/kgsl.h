@@ -52,6 +52,10 @@
 
 #define KGSL_MAX_NUMIBS 100000
 
+#ifdef CONFIG_CPU_FREQ_GOV_SLIM
+extern int graphics_boost;
+#endif
+
 struct kgsl_memfree_hist_elem {
 	unsigned int pid;
 	unsigned int gpuaddr;
